@@ -30,15 +30,20 @@ export default function QueryProcessor(query: string): string {
     return Math.max(...numbersArray).toString();
   }
 
-  if (query.toLowerCase().includes("multiplied by")) {
-    const numbers = query.match(/\d+/g);
+  const pattern0 = /^What is \d+ multiplied by \d+\?$/;
+    
+  // Check if the query matches the pattern
+  if (pattern0.test(query)) {
+      // Extract numbers from the query string
+      const numbers = query.match(/\d+/g);
 
-    if (numbers && numbers.length === 2) {
-        const num1 = parseInt(numbers[0]);
-        const num2 = parseInt(numbers[1]);
-        const result = num1 * num2;
-        return result.toString()
-    }
+      // Ensure that exactly two numbers are extracted
+      if (numbers && numbers.length === 2) {
+          const num1 = parseInt(numbers[0]);
+          const num2 = parseInt(numbers[1]);
+          const result = num1 * num2;
+          return result.toString();
+      }
   }
 
   const pattern = /^What is \d+ plus \d+\?$/;
