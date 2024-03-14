@@ -42,8 +42,39 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
+  if (query.toLowerCase().includes("which of the following numbers is both a square and a cube")) {
+    return findSquareAndCubeFromString(query);
+  }
+
   
 
   // git add . ; git commit -m “startup”; git push;
+  return "";
+}
+function isSquareAndCube(num: number): boolean {
+  // Check if the number is a perfect square
+  const squareRoot = Math.sqrt(num);
+  if (Number.isInteger(squareRoot)) {
+      // Check if the square root is also a perfect cube
+      const cubeRoot = Math.cbrt(num);
+      if (Number.isInteger(cubeRoot)) {
+          return true;
+      }
+  }
+  return false;
+}
+
+function findSquareAndCubeFromString(input: string): string {
+  // Extract numbers from the input string
+  const numbers = input.match(/\d+/g);
+
+  if (numbers) {
+      for (const numStr of numbers) {
+          const num = parseInt(numStr);
+          if (isSquareAndCube(num)) {
+              return num.toString();
+          }
+      }
+  }
   return "";
 }
