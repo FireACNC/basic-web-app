@@ -46,8 +46,8 @@ export default function QueryProcessor(query: string): string {
       }
   }
 
-  const pattern = /^What is \d+ plus \d+\?$/;
-  if (pattern.test(query)) {
+  const pattern1 = /^What is \d+ plus \d+\?$/;
+  if (pattern1.test(query)) {
     const numbers = query.match(/\d+/g);
 
     if (numbers && numbers.length >= 2) {
@@ -62,7 +62,31 @@ export default function QueryProcessor(query: string): string {
     return findSquareAndCubeFromString(query);
   }
 
-  
+  const pattern2 = /^What is \d+ divided by \d+\?$/;
+
+  if (pattern2.test(query)) {
+      const numbers = query.match(/\d+/g);
+      if (numbers && numbers.length === 2) {
+          const num1 = parseInt(numbers[0]);
+          const num2 = parseInt(numbers[1]);
+          if (num2 !== 0) { // Prevent division by zero
+              const result = Math.floor(num1 / num2); // Integer division
+              return result.toString();
+          }
+      }
+  }
+
+  const pattern3 = /^What is \d+ minus \d+\?$/;
+
+  if (pattern3.test(query)) {
+      const numbers = query.match(/\d+/g);
+      if (numbers && numbers.length === 2) {
+          const num1 = parseInt(numbers[0]);
+          const num2 = parseInt(numbers[1]);
+          const result = num1 - num2;
+          return result.toString();
+      }
+  }
 
   // git add . ; git commit -m “startup”; git push;
   return "";
