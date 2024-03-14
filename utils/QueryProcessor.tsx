@@ -30,6 +30,19 @@ export default function QueryProcessor(query: string): string {
     return Math.max(...numbersArray).toString();
   }
 
+  if (query.toLowerCase().includes("plus")) {
+    const numbers = query.match(/\d+/g);
+
+    if (numbers && numbers.length >= 2) {
+        const num1 = parseInt(numbers[0]);
+        const num2 = parseInt(numbers[1]);
+        const result = num1 + num2;
+        return result.toString();
+    }
+  }
+
+  
+
   // git add . ; git commit -m “startup”; git push;
   return "";
 }
