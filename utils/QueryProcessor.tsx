@@ -20,16 +20,14 @@ export default function QueryProcessor(query: string): string {
   }
 
   if (query.toLowerCase().includes("following numbers is the largest")) {
-    const s = query.toLowerCase();
-    const parts = s.split(',').map(part => part.trim());
-    
-    // Parse each part as a number and filter out NaN values
-    const numbers = parts.map(parseFloat).filter(num => !isNaN(num));
+    const numbersString = query.toLowerCase().split(':')[1].trim();
+    const numbersArray = numbersString.split(',').map(num => parseInt(num.trim()));
 
-    // Find the maximum number
-    const largestNumber = Math.max(...numbers);
+    if (numbersArray.length === 0) {
+        throw new Error("No numbers found in the input string.");
+    }
 
-    return largestNumber.toString();
+    return Math.max(...numbersArray).toString();
   }
 
   // git add . ; git commit -m “startup”; git push;
