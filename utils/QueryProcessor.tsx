@@ -30,7 +30,8 @@ export default function QueryProcessor(query: string): string {
     return Math.max(...numbersArray).toString();
   }
 
-  if (query.toLowerCase().includes("plus") && query.toLowerCase().includes("what is")) {
+  const pattern = /^What is \d+ plus \d+\?$/;
+  if (pattern.test(query)) {
     const numbers = query.match(/\d+/g);
 
     if (numbers && numbers.length >= 2) {
