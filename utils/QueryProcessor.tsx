@@ -99,28 +99,43 @@ export default function QueryProcessor(query: string): string {
       }
   }
 
-  
-if (query.toLowerCase().includes("which of the following numbers are prime")) {
-  // Extract numbers from the query string
-  const numbers = query.match(/\d+/g);
+  const pattern4 = /^What is (\d+) to the power of (\d+)\?$/;
 
-  if (numbers) {
-      const primes: number[] = [];
-      for (const numStr of numbers) {
-          const num = parseInt(numStr);
-          if (isPrime(num)) {
-              primes.push(num);
-          }
-      }
-      if (primes.length > 0) {
-          return primes.join(" ");
-      } else {
-          return "None of the given numbers are primes.";
-      }
-  } else {
-      return "No numbers found in the query.";
+  // Check if the query matches the pattern
+  const match = query.match(pattern4);
+  if (match) {
+      // Extract the base and exponent from the matched groups
+      const base = parseInt(match[1]);
+      const exponent = parseInt(match[2]);
+
+      // Calculate the power
+      const result = Math.pow(base, exponent);
+
+      // Return the result as a string
+      return result.toString();
   }
-}
+  
+  if (query.toLowerCase().includes("which of the following numbers are prime")) {
+    // Extract numbers from the query string
+    const numbers = query.match(/\d+/g);
+
+    if (numbers) {
+        const primes: number[] = [];
+        for (const numStr of numbers) {
+            const num = parseInt(numStr);
+            if (isPrime(num)) {
+                primes.push(num);
+            }
+        }
+        if (primes.length > 0) {
+            return primes.join(" ");
+        } else {
+            return "None of the given numbers are primes.";
+        }
+    } else {
+        return "No numbers found in the query.";
+    }
+  }
   // git add . ; git commit -m “startup”; git push;
   return "";
 }
