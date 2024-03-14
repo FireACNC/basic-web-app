@@ -19,5 +19,19 @@ export default function QueryProcessor(query: string): string {
     );
   }
 
+  if (query.toLowerCase().includes("following numbers is the largest")) {
+    const s = query.toLowerCase();
+    const parts = s.split(',').map(part => part.trim());
+    
+    // Parse each part as a number and filter out NaN values
+    const numbers = parts.map(parseFloat).filter(num => !isNaN(num));
+
+    // Find the maximum number
+    const largestNumber = Math.max(...numbers);
+
+    return largestNumber.toString();
+  }
+
+  // git add . ; git commit -m “startup”; git push;
   return "";
 }
