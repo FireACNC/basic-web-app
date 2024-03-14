@@ -30,6 +30,17 @@ export default function QueryProcessor(query: string): string {
     return Math.max(...numbersArray).toString();
   }
 
+  if (query.toLowerCase().includes("following numbers is the smallest")) {
+    const numbersString = query.toLowerCase().split(':')[1].trim();
+    const numbersArray = numbersString.split(',').map(num => parseInt(num.trim()));
+
+    if (numbersArray.length === 0) {
+        throw new Error("No numbers found in the input string.");
+    }
+
+    return Math.min(...numbersArray).toString();
+  }
+
   const pattern0 = /^What is \d+ multiplied by \d+\?$/;
     
   // Check if the query matches the pattern
