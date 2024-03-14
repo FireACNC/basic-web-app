@@ -136,6 +136,23 @@ export default function QueryProcessor(query: string): string {
         return "No numbers found in the query.";
     }
   }
+
+  const pattern10 = /^What is (\d+) plus (\d+)(?: plus (\d+))?(\?)?$/;
+
+    // Check if the query matches the pattern
+  const match2 = query.match(pattern10);
+  if (match2) {
+      // Extract the numbers from the matched groups
+      const num1 = parseInt(match2[1]);
+      const num2 = parseInt(match2[2]);
+      const num3 = match2[3] ? parseInt(match2[3]) : 0;
+
+      // Calculate the sum
+      const sum = num1 + num2 + num3;
+
+      // Return the sum as a string
+      return sum.toString();
+  }
   // git add . ; git commit -m “startup”; git push;
   return "";
 }
