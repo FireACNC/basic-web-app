@@ -99,6 +99,28 @@ export default function QueryProcessor(query: string): string {
       }
   }
 
+  
+if (query.toLowerCase().includes("which of the following numbers are prime")) {
+  // Extract numbers from the query string
+  const numbers = query.match(/\d+/g);
+
+  if (numbers) {
+      const primes: number[] = [];
+      for (const numStr of numbers) {
+          const num = parseInt(numStr);
+          if (isPrime(num)) {
+              primes.push(num);
+          }
+      }
+      if (primes.length > 0) {
+          return primes.join(" ");
+      } else {
+          return "None of the given numbers are primes.";
+      }
+  } else {
+      return "No numbers found in the query.";
+  }
+}
   // git add . ; git commit -m “startup”; git push;
   return "";
 }
@@ -128,4 +150,16 @@ function findSquareAndCubeFromString(input: string): string {
       }
   }
   return "";
+}
+
+function isPrime(num: number): boolean {
+  if (num <= 1) {
+      return false;
+  }
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) {
+          return false;
+      }
+  }
+  return true;
 }
